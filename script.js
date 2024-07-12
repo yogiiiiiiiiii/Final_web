@@ -105,13 +105,13 @@ function handleCsvUpload() {
             <div class="topic-container">
                 <h3>Topic ${i + 1}</h3>
                 <label for="topicName${i + 1}">Topic Name:</label>
-                <input type="text" id="topicName${i + 1}" name="topicName${i + 1}" value="${topic.topicName}" required><br>
+                <input type="text" id="topicName${i + 1}" name="topicName${i + 1}" value="${topic.topicName}" readonly><br>
                 <label for="hard${i + 1}">Number of hard questions:</label>
-                <input type="number" id="hard${i + 1}" name="hard${i + 1}" min="0" value="${topic.hard.count}" required><br>
+                <input type="number" id="hard${i + 1}" name="hard${i + 1}" value="${topic.hard.count}" readonly><br>
                 <label for="medium${i + 1}">Number of medium questions:</label>
-                <input type="number" id="medium${i + 1}" name="medium${i + 1}" min="0" value="${topic.medium.count}" required><br>
+                <input type="number" id="medium${i + 1}" name="medium${i + 1}" value="${topic.medium.count}" readonly><br>
                 <label for="easy${i + 1}">Number of easy questions:</label>
-                <input type="number" id="easy${i + 1}" name="easy${i + 1}" min="0" value="${topic.easy.count}" required><br>
+                <input type="number" id="easy${i + 1}" name="easy${i + 1}" value="${topic.easy.count}" readonly><br>
             </div>
         `;
     });
@@ -122,9 +122,7 @@ function handleCsvUpload() {
 function generateQuestionForms() {
     topicsData.forEach((topic, index) => {
         topic.topicName = document.getElementById(`topicName${index + 1}`).value;
-        topic.hard.count = Number(document.getElementById(`hard${index + 1}`).value);
-        topic.medium.count = Number(document.getElementById(`medium${index + 1}`).value);
-        topic.easy.count = Number(document.getElementById(`easy${index + 1}`).value);
+        // We don't need to update the count values here as they are now read-only
         
         if (!topic.hard.questions.length) topic.hard.questions = Array.from({length: topic.hard.count}, (_, i) => i + 1);
         if (!topic.medium.questions.length) topic.medium.questions = Array.from({length: topic.medium.count}, (_, i) => i + 1);
